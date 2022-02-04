@@ -2,6 +2,7 @@
 "" Basic
 "" -----
 set nocompatible
+let mapleader=" "
 
 filetype on
 filetype indent on
@@ -21,6 +22,18 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
+function! SetTab2()
+  set tabstop=2
+  set shiftwidth=2
+  set softtabstop=2
+endfunction
+function! SetTab4()
+  set tabstop=4
+  set shiftwidth=4
+  set softtabstop=4
+endfunction
+map <leader>s2 :call SetTab2()<CR>
+map <leader>s4 :call SetTab4()<CR>
 
 " set mouse=a
 set encoding=utf-8
@@ -42,7 +55,6 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 "" -------
 "" Motions
 "" -------
-let mapleader=" "
 
 imap kj <ESC>
 
@@ -55,6 +67,7 @@ noremap L 5l
 "" ---------
 "" Shortcuts
 "" ---------
+map s <Nop>
 map S :w<CR>
 map Q :q<CR>
 map R :source $MYVIMRC<CR>
