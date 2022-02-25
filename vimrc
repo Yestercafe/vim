@@ -35,7 +35,7 @@ endfunction
 map <leader>s2 :call SetTab2()<CR>
 map <leader>s4 :call SetTab4()<CR>
 
-" set mouse=a
+set mouse=a
 set encoding=utf-8
 set fileencodings=utf-8,gb18030
 let &t_ut=''
@@ -83,8 +83,8 @@ set incsearch
 set ignorecase
 set smartcase
 
-noremap = nzz
-noremap - Nzz
+"noremap = nzz
+"noremap - Nzz
 noremap <LEADER><CR> :nohlsearch<CR>
 
 
@@ -267,6 +267,11 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
