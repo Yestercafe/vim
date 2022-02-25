@@ -67,11 +67,10 @@ noremap L 5l
 "" ---------
 "" Shortcuts
 "" ---------
-map s <Nop>
-map S :w<CR>
-map Q :q<CR>
-map R :source $MYVIMRC<CR>
-map ; :
+map <leader>fs :w<CR>
+map <leader>qq :q<CR>
+map <leader><f4> :source $MYVIMRC<CR>
+" map ; :
 
 
 "" ------
@@ -91,24 +90,25 @@ noremap <LEADER><CR> :nohlsearch<CR>
 "" -------------
 "" Window manage
 "" -------------
-map sl :set splitright<CR>:vsplit<CR>
-map sh :set nosplitright<CR>:vsplit<CR>
-map sj :set splitbelow<CR>:split<CR>
-map sk :set nosplitbelow<CR>:split<CR>
+map <leader>ws :set splitright<CR>:vsplit<CR>
+map <leader>wS :set nosplitright<CR>:vsplit<CR>
+map <leader>wv :set splitbelow<CR>:split<CR>
+map <leader>wV :set nosplitbelow<CR>:split<CR>
 
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+map <leader>wh <C-w>h
+map <leader>wj <C-w>j
+map <leader>wk <C-w>k
+map <leader>wl <C-w>l
 
-map <LEADER><up> :res -2<CR>
-map <LEADER><down> :res +2<CR>
-map <LEADER><left> :vertical resize-4<CR>
-map <LEADER><right> :vertical resize+4<CR>
+map <leader>w+ :res -2<CR>
+map <leader>w= :res -2<CR>
+map <leader>w- :res +2<CR>
+map <leader>w\< :vertical resize-4<CR>
+map <leader>w\> :vertical resize+4<CR>
 
-map tt :tabe<CR>
-map tl :+tabnext<CR>
-map th :-tabnext<CR>
+map <leader>jt :tabe<CR>
+map <leader>jl :+tabnext<CR>
+map <leader>jh :-tabnext<CR>
 
 
 "" -------
@@ -170,7 +170,7 @@ let g:airline_theme='wombat'
 let g:airline_section_z = "%p%% %l/%L:%v"
 
 "" nerd tree
-map <LEADER>t :NERDTreeToggle<CR>
+map <leader>fd :NERDTreeToggle<CR>
 let NERDTreeMapOpenExpl = ""
 let NERDTreeMapUpdir = ""
 let NERDTreeMapUpdirKeepOpen = "l"
@@ -227,7 +227,7 @@ let g:mkdp_page_title = '「${name}」'
 
 
 "" markdown table mode
-map <LEADER>mtm :TableModeToggle<CR>
+map <leader>amt :TableModeToggle<CR>
 
 
 "" vim signiture
@@ -258,7 +258,7 @@ let g:SignatureMap = {
 
 "" undo tree
 let g:undotree_DiffAutoOpen = 0
-map <LEADER>ut :UndotreeToggle<CR>
+map <LEADER>u :UndotreeToggle<CR>
 
 "" Coc.vim
 " tab trigger
