@@ -155,12 +155,15 @@ Plug 'preservim/nerdcommenter' " in <space>cc to comment a line
 "" Coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+"" Wakatime
+Plug 'wakatime/vim-wakatime'
+
 call plug#end()
 
 
 "" Theme
 
-color snazzy
+"color snazzy
 
 
 "" airline
