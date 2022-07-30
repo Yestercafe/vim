@@ -100,6 +100,13 @@ map <leader>wj <C-w>j
 map <leader>wk <C-w>k
 map <leader>wl <C-w>l
 
+nmap <leader>bh :bp<CR>
+nmap <leader>bl :bn<CR>
+nmap <leader>bH :bf<CR>
+nmap <leader>bL :bl<CR>
+nmap <leader>B :b 
+nmap <leader>bx :bw
+
 map <leader>w+ :res -2<CR>
 map <leader>w= :res -2<CR>
 map <leader>w- :res +2<CR>
@@ -120,7 +127,6 @@ call plug#begin('~/.vim/plugged')
 "" airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'bling/vim-bufferline'
 
 "" themes
 Plug 'connorholyday/vim-snazzy'
@@ -158,6 +164,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "" Wakatime
 Plug 'wakatime/vim-wakatime'
 
+"" auto-pairs
+Plug 'jiangmiao/auto-pairs'
+
 call plug#end()
 
 
@@ -167,7 +176,7 @@ call plug#end()
 
 
 "" airline
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_theme='wombat'
 let g:airline_section_z = "%p%% %l/%L:%v"
