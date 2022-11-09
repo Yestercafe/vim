@@ -1,8 +1,12 @@
-"" -----
+
+
 "" Basic
 "" -----
 set nocompatible
+set nobackup
+set noswapfile
 let mapleader=" "
+imap kj <ESC>
 
 filetype on
 filetype indent on
@@ -11,109 +15,213 @@ filetype plugin indent on
 
 syntax on
 
+" Encoding
+set encoding=utf-8
+set fileencodings=utf-8,gb18030
+
 set number
 set relativenumber
 set cursorline
 set wrap
 set showcmd
 set wildmenu
+set title
+set scrolloff=5
+set foldmethod=indent
+set foldlevel=99
+set laststatus=2
+set autochdir
+
+" Powerful backspace?
+set backspace=indent,eol,start
+
+" Last open position
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" (t)oggle showing (i)nvisible characters
+set nolist
+set listchars=extends:#,precedes:#,tab:▸\ ,trail:▫,eol:¬
+nmap <leader>ti :set list!<CR>
+
+" Disable bell
+set visualbell
+set noerrorbells
+set t_vb=
+
+" Fix mouse scrolling 
+" ref: https://www.reddit.com/r/vim/comments/c7a39a/can_anyone_tell_me_what_this_is/
+let &t_ut=''
+
+" w!! saves the file with sudo
+cmap w!! w !sudo tee % >/dev/null
+
+
+"" ---
+"" Indent
+"" ---
+function! SetTab2()
+    set tabstop=2
+    set shiftwidth=2
+    set softtabstop=2
+    echo "Tab width set to 2"
+endfunction
+function! SetTab4()
+    set tabstop=4
+    set shiftwidth=4
+    set softtabstop=4
+    echo "Tab width set to 4"
+endfunction
+function! ToggleTabWidth()
+    if &tabstop == 2
+        set tabstop=4
+        set shiftwidth=4
+        set softtabstop=4
+        echo "Tab width set to 4"
+    else
+        set tabstop=2
+        set shiftwidth=2
+        set softtabstop=2
+        echo "Tab width set to 2"
+    endif
+endfunction
+" (t)oggle (t)ab
+nnoremap <leader>tt :call ToggleTabWidth()<CR>
+map <leader>tT2 :call SetTab2()<CR>
+map <leader>tT4 :call SetTab4()<CR>
 
 set expandtab
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-function! SetTab2()
-  set tabstop=2
-  set shiftwidth=2
-  set softtabstop=2
-endfunction
-function! SetTab4()
-  set tabstop=4
-  set shiftwidth=4
-  set softtabstop=4
-endfunction
-map <leader>s2 :call SetTab2()<CR>
-map <leader>s4 :call SetTab4()<CR>
-
-set mouse=a
-set encoding=utf-8
-set fileencodings=utf-8,gb18030
-let &t_ut=''
-set list
-set listchars=tab:▸\ ,trail:▫
-set scrolloff=5
-set foldmethod=indent
-set foldlevel=99
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-set laststatus=2
-set autochdir
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
 "" -------
 "" Motions
 "" -------
-
-imap kj <ESC>
+set mouse=a
 
 noremap J 5j
 noremap K 5k
 noremap H 5h
 noremap L 5l
+noremap U <C-u>
+noremap D <C-d>
+
+" Disable arrow keys
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
+
+" Use different cursor shape in different mode
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 
-"" ---------
-"" Shortcuts
-"" ---------
+"" ---------------
+"" Basic shortcuts
+"" ---------------
+" %% expands into path to current file
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
+" (f)ile (f)ile
+map <leader>ff :e %%
+" (f)ile (s)ave
 map <leader>fs :w<CR>
+" (q)uit (q)uit
 map <leader>qq :q<CR>
+" (f)ile (S)ource vimrc
+map <leader>fS :source $MYVIMRC<CR>
+
+" The optional schema (deprecated)
+"map <leader>w :w<CR>
+"map <leader>q :q<CR>
 map <leader><f4> :source $MYVIMRC<CR>
-" map ; :
 
 
 "" ------
-"" Search
+"" Editor
 "" ------
+noremap s <nop>
+" Use meta-backspace to delete a word in terminal
+imap <Esc><BS> <C-W>
+
+
+"" ------------------
+"" Search & highlight
+"" ------------------
 set hlsearch
 exec "nohlsearch"
 set incsearch
 set ignorecase
 set smartcase
 
-"noremap = nzz
-"noremap - Nzz
-noremap <LEADER><CR> :nohlsearch<CR>
+noremap n nzz
+noremap N Nzz
+" (s)earch lighting (c)lear
+noremap <LEADER>sc :nohlsearch<CR>
+
+" (t)oggle highlight co(l)umn81
+let &colorcolumn=0
+nnoremap <leader>tl :call ColorColumnToggle()<CR>
+function! ColorColumnToggle()
+    if &colorcolumn
+        set colorcolumn=0
+    else
+        set colorcolumn=81
+    endif
+endfunction
 
 
 "" -------------
 "" Window manage
 "" -------------
-map <leader>ws :set splitright<CR>:vsplit<CR>
-map <leader>wS :set nosplitright<CR>:vsplit<CR>
-map <leader>wv :set splitbelow<CR>:split<CR>
-map <leader>wV :set nosplitbelow<CR>:split<CR>
+" Window split: (v)ertical & (s)plit
+map <leader>wv :set splitright<CR>:vsplit<CR>
+map <leader>wV :set nosplitright<CR>:vsplit<CR>
+map <leader>ws :set splitbelow<CR>:split<CR>
+map <leader>wS :set nosplitbelow<CR>:split<CR>
 
+" Window focus
 map <leader>wh <C-w>h
 map <leader>wj <C-w>j
 map <leader>wk <C-w>k
 map <leader>wl <C-w>l
+" The optional schema
+noremap <Up> <C-w>k
+noremap <Down> <C-w>j
+noremap <Left> <C-w>h
+noremap <Right> <C-w>l
 
+" Window size
+map <leader>w+ :res -2<CR>
+map <leader>w= :res -2<CR>
+map <leader>w- :res +2<CR>
+map <leader>w< :vertical resize-4<CR>
+map <leader>w> :vertical resize+4<CR>
+" The optional schema
+map <S-Up> :res -2<CR>
+map <S-down> :res +2<CR>
+map <S-left> :vertical resize-4<CR>
+map <S-right> :vertical resize+4<CR>
+
+" Buffers
 nmap <leader>bh :bp<CR>
 nmap <leader>bl :bn<CR>
 nmap <leader>bH :bf<CR>
 nmap <leader>bL :bl<CR>
-nmap <leader>B :b 
-nmap <leader>bx :bw
+nmap <leader>bb :b 
+nmap <leader>B :buffers<CR>
+" (b)uffer (k)ill
+nmap <leader>bk :bw
+" (b)uffer (r)ewind
+nmap <leader>br :brewind<CR>
 
-map <leader>w+ :res -2<CR>
-map <leader>w= :res -2<CR>
-map <leader>w- :res +2<CR>
-map <leader>w\< :vertical resize-4<CR>
-map <leader>w\> :vertical resize+4<CR>
-
-map <leader>jt :tabe<CR>
+" Tabs(j)
+" (j) (n)ew
+map <leader>jn :tabe<CR>
+" (j) (f)ile
+map <leader>jf :tabe %%
 map <leader>jl :+tabnext<CR>
 map <leader>jh :-tabnext<CR>
 
@@ -134,6 +242,9 @@ Plug 'connorholyday/vim-snazzy'
 "" nerd tree
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
+
+"" easy motion
+Plug 'easymotion/vim-easymotion'
 
 "" tag
 Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
@@ -156,7 +267,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'kshenoy/vim-signature'
 
 "" Utils
-Plug 'preservim/nerdcommenter' " in <space>cc to comment a line
+Plug 'preservim/nerdcommenter'
 
 "" Coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -165,20 +276,20 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'wakatime/vim-wakatime'
 
 "" auto-pairs
-Plug 'jiangmiao/auto-pairs'
+Plug 'Yescafe/auto-pairs'
 
 call plug#end()
 
 
 "" Theme
-
 "color snazzy
 
-
 "" airline
-let g:airline_powerline_fonts = 0
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_theme='wombat'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_theme='molokai'
 let g:airline_section_z = "%p%% %l/%L:%v"
 
 "" nerd tree
@@ -205,12 +316,26 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Deleted"   : "✖",
     \ "Dirty"     : "✗",
     \ "Clean"     : "✔︎",
-    \ "Unknown"   : "?"
+    \ "Unknow"   : "?"
     \ }
 
 
+"" easy motion
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+" (f)ind
+nmap f <Plug>(easymotion-f)
+" (m)otion (f)ind2
+nmap mf <Plug>(easymotion-f2)
+" (m)otion (l)ine
+nmap ml <Plug>(easymotion-jk)
+" (m)otion (w)ord
+nmap mw <Plug>(easymotion-w)
+
+
 "" tag bar
-map <silent> T :TagbarOpenAutoClose<CR>
+" (t)oggle (c)tags
+map <silent>tc :TagbarOpenAutoClose<CR>
 
 
 "" Markdown
@@ -239,50 +364,52 @@ let g:mkdp_page_title = '「${name}」'
 
 
 "" markdown table mode
-map <leader>amt :TableModeToggle<CR>
+" (t)oggle (m)arkdown table mode
+map <leader>tm :TableModeToggle<CR>
 
 
 "" vim signiture
 let g:SignatureMap = {
-        \ 'Leader'             :  "m",
-        \ 'PlaceNextMark'      :  "m,",
-        \ 'ToggleMarkAtLine'   :  "m.",
-        \ 'PurgeMarksAtLine'   :  "dm-",
-        \ 'DeleteMark'         :  "dm",
-        \ 'PurgeMarks'         :  "dm/",
-        \ 'PurgeMarkers'       :  "dm?",
-        \ 'GotoNextLineAlpha'  :  "m<LEADER>",
-        \ 'GotoPrevLineAlpha'  :  "",
-        \ 'GotoNextSpotAlpha'  :  "m<LEADER>",
-        \ 'GotoPrevSpotAlpha'  :  "",
-        \ 'GotoNextLineByPos'  :  "",
-        \ 'GotoPrevLineByPos'  :  "",
-        \ 'GotoNextSpotByPos'  :  "mn",
-        \ 'GotoPrevSpotByPos'  :  "mp",
-        \ 'GotoNextMarker'     :  "",
-        \ 'GotoPrevMarker'     :  "",
-        \ 'GotoNextMarkerAny'  :  "",
-        \ 'GotoPrevMarkerAny'  :  "",
-        \ 'ListLocalMarks'     :  "m/",
-        \ 'ListLocalMarkers'   :  "m?"
-        \ }
+    \ 'Leader'             :  "m",
+    \ 'PlaceNextMark'      :  "m,",
+    \ 'ToggleMarkAtLine'   :  "m.",
+    \ 'PurgeMarksAtLine'   :  "dm-",
+    \ 'DeleteMark'         :  "dm",
+    \ 'PurgeMarks'         :  "dm/",
+    \ 'PurgeMarkers'       :  "dm?",
+    \ 'GotoNextLineAlpha'  :  "m<LEADER>",
+    \ 'GotoPrevLineAlpha'  :  "",
+    \ 'GotoNextSpotAlpha'  :  "m<LEADER>",
+    \ 'GotoPrevSpotAlpha'  :  "",
+    \ 'GotoNextLineByPos'  :  "",
+    \ 'GotoPrevLineByPos'  :  "",
+    \ 'GotoNextSpotByPos'  :  "mn",
+    \ 'GotoPrevSpotByPos'  :  "mp",
+    \ 'GotoNextMarker'     :  "",
+    \ 'GotoPrevMarker'     :  "",
+    \ 'GotoNextMarkerAny'  :  "",
+    \ 'GotoPrevMarkerAny'  :  "",
+    \ 'ListLocalMarks'     :  "m/",
+    \ 'ListLocalMarkers'   :  "m?"
+    \ }
 
 
 "" undo tree
 let g:undotree_DiffAutoOpen = 0
-map <LEADER>u :UndotreeToggle<CR>
+map <leader>u :UndotreeToggle<CR>:UndotreeFocus<CR>
+
 
 "" Coc.vim
 " tab trigger
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -293,4 +420,14 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+
+"" Nerd commenter
+map <leader>/ <leader>c<leader>
+
+
+"" auto pairs
+
+let g:AutoPairsMapSpace = 0
+
 
