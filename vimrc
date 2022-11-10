@@ -328,8 +328,8 @@ let g:NERDTreeIndicatorMapCustom = {
 "" easy motion
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
-" (f)ind
-nmap f <Plug>(easymotion-f)
+" (s)earch
+nmap s <Plug>(easymotion-f)
 " (m)otion (f)ind2
 nmap mf <Plug>(easymotion-f2)
 " (m)otion (l)ine
