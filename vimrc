@@ -135,6 +135,7 @@ map <leader>ff :e %%
 map <leader>fs :w<CR>
 " (q)uit (q)uit
 map <leader>qq :q<CR>
+map <leader>qQ :qall<CR>
 " (f)ile (S)ource vimrc
 map <leader>fS :source $MYVIMRC<CR>
 
@@ -199,9 +200,9 @@ noremap <Left> <C-w>h
 noremap <Right> <C-w>l
 
 " Window size
-noremap <leader>w+ :res -2<CR>
-noremap <leader>w= :res -2<CR>
-noremap <leader>w- :res +2<CR>
+noremap <leader>w+ :res +2<CR>
+noremap <leader>w= :res +2<CR>
+noremap <leader>w- :res -2<CR>
 noremap <leader>w< :vertical resize-4<CR>
 noremap <leader>w> :vertical resize+4<CR>
 " The optional schema
