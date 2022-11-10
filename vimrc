@@ -6,7 +6,7 @@ set nocompatible
 set nobackup
 set noswapfile
 let mapleader=" "
-imap kj <ESC>
+inoremap kj <ESC>
 
 filetype on
 filetype indent on
@@ -149,7 +149,7 @@ map <leader><f4> :source $MYVIMRC<CR>
 "" ------
 noremap s <nop>
 " Use meta-backspace to delete a word in terminal
-imap <Esc><BS> <C-W>
+inoremap <Esc><BS> <C-W>
 
 
 "" ------------------
@@ -188,10 +188,10 @@ map <leader>ws :set splitbelow<CR>:split<CR>
 map <leader>wS :set nosplitbelow<CR>:split<CR>
 
 " Window focus
-map <leader>wh <C-w>h
-map <leader>wj <C-w>j
-map <leader>wk <C-w>k
-map <leader>wl <C-w>l
+noremap <leader>wh <C-w>h
+noremap <leader>wj <C-w>j
+noremap <leader>wk <C-w>k
+noremap <leader>wl <C-w>l
 " The optional schema
 noremap <Up> <C-w>k
 noremap <Down> <C-w>j
@@ -199,16 +199,16 @@ noremap <Left> <C-w>h
 noremap <Right> <C-w>l
 
 " Window size
-map <leader>w+ :res -2<CR>
-map <leader>w= :res -2<CR>
-map <leader>w- :res +2<CR>
-map <leader>w< :vertical resize-4<CR>
-map <leader>w> :vertical resize+4<CR>
+noremap <leader>w+ :res -2<CR>
+noremap <leader>w= :res -2<CR>
+noremap <leader>w- :res +2<CR>
+noremap <leader>w< :vertical resize-4<CR>
+noremap <leader>w> :vertical resize+4<CR>
 " The optional schema
-map <S-Up> :res -2<CR>
-map <S-down> :res +2<CR>
-map <S-left> :vertical resize-4<CR>
-map <S-right> :vertical resize+4<CR>
+noremap <S-Up> :res -2<CR>
+noremap <S-down> :res +2<CR>
+noremap <S-left> :vertical resize-4<CR>
+noremap <S-right> :vertical resize+4<CR>
 
 " Buffers
 nmap <leader>bh :bp<CR>
@@ -427,7 +427,7 @@ nmap <silent> gr <Plug>(coc-references)
 
 
 "" Nerd commenter
-map <leader>/ <leader>c<leader>
+noremap <leader>/ <leader>c<leader>
 
 
 "" auto pairs
