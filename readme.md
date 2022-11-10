@@ -113,4 +113,9 @@ Tabs(j):
 <leader>jl: switch to next tab
 ```
 
+Docs(d):
+
+```
+<leader>dd: coc show documentation
+```
 
