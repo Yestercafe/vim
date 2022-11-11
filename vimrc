@@ -441,7 +441,7 @@ nmap <silent> <leader>dd :call ShowDocumentation()<CR>
 
 
 "" Nerd commenter
-noremap <leader>/ <leader>c<leader>
+map <leader>/ <leader>c<leader>
 
 
 "" auto pairs
