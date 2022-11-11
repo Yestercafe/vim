@@ -17,8 +17,10 @@ Leader is space. `kj` maps to Esc.
 Basic:
 
 ```
-<leader>qq: quit this window
-<leader>qQ: quit all
+<leader>qq: quit this window (:q)
+<leader>qQ: quit all (:qall)
+<leader>qw: save & quit this window (:wq)
+<leader>q!: force quit this window (:q!)
 ```
 
 Motions:

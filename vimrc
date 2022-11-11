@@ -138,6 +138,10 @@ map <leader>qq :q<CR>
 map <leader>qQ :qall<CR>
 " (f)ile (S)ource vimrc
 map <leader>fS :source $MYVIMRC<CR>
+" (q)(w)
+map <leader>qw :wq<CR>
+" force quit
+map <leader>q! :q!<CR>
 
 " The optional schema (deprecated)
 "map <leader>w :w<CR>
