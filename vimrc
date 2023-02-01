@@ -107,8 +107,8 @@ set mouse=a
 
 noremap J 5j
 noremap K 5k
-noremap H 5h
-noremap L 5l
+noremap H ^
+noremap L $
 noremap U <C-u>
 noremap D <C-d>
 
