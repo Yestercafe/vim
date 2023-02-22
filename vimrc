@@ -287,6 +287,9 @@ Plug 'wakatime/vim-wakatime'
 "" auto-pairs
 Plug 'Yescafe/auto-pairs'
 
+Plug 'rescript-lang/vim-rescript'
+Plug 'msuperdock/vim-agda'
+
 call plug#end()
 
 
