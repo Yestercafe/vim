@@ -28,8 +28,8 @@ Motions:
 ```
 J: move down 5 times
 K: move up 5 times
-H: move left 5 times
-L: move right 5 times
+H: move to the head of the line
+L: move to the tail of the line
 U: half page up, equivalent to Ctrl-u
 D: half page down, equivalent to Ctrl-d
 s: easymotion find 1 letter
