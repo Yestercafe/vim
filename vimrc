@@ -451,8 +451,8 @@ nmap <silent> <leader>cd :call ShowDocumentation()<CR>
 
 
 "" Nerd commenter
-nnoremap gcc <leader>c<leader>
-vnoremap gc <leader>c<leader>
+nmap gcc <leader>c<leader>
+vmap gc <leader>c<leader>
 
 
 "" auto pairs
