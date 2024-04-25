@@ -238,6 +238,9 @@ map <leader>jf :tabe %%
 map <leader>jl :+tabnext<CR>
 map <leader>jh :-tabnext<CR>
 
+" Yank & paste
+map <leader>y "+y
+map <leader>p "+p
 
 "" -------
 "" Plugins
@@ -456,8 +459,6 @@ let g:coc_disable_startup_warning = 1
 nmap gcc <leader>c<leader>
 vmap gc <leader>c<leader>
 
-
 "" auto pairs
-
 let g:AutoPairsMapSpace = 0
 
