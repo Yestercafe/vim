@@ -449,6 +449,8 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> <leader>cd :call ShowDocumentation()<CR>
 
+"" Disable warning no Ubuntu 20.04(vim version < 8.2)
+let g:coc_disable_startup_warning = 1
 
 "" Nerd commenter
 nmap gcc <leader>c<leader>
