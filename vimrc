@@ -1,5 +1,4 @@
-
-
+"" -----
 "" Basic
 "" -----
 set nocompatible
@@ -38,7 +37,7 @@ set backspace=indent,eol,start
 " Last open position
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-j" (t)oggle showing (i)nvisible characters
+" (t)oggle showing (i)nvisible characters
 set nolist
 set listchars=extends:#,precedes:#,tab:▸\ ,trail:▫,eol:¬
 nmap <leader>ti :set list!<CR>
@@ -94,8 +93,8 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 
-nnoremap < <<
-nnoremap > >>
+"nnoremap < <<
+"nnoremap > >>
 vnoremap < <gv
 vnoremap > >gv
 
@@ -105,18 +104,16 @@ vnoremap > >gv
 "" -------
 set mouse=a
 
-noremap J 5j
-noremap K 5k
 noremap H ^
 noremap L $
 noremap U <C-u>
 noremap D <C-d>
 
 " Disable arrow keys
-noremap <up> <nop>
-noremap <down> <nop>
-noremap <left> <nop>
-noremap <right> <nop>
+"noremap <up> <nop>
+"noremap <down> <nop>
+"noremap <left> <nop>
+"noremap <right> <nop>
 
 " Use different cursor shape in different mode
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -191,8 +188,14 @@ map <leader>wv :set splitright<CR>:vsplit<CR>
 map <leader>wV :set nosplitright<CR>:vsplit<CR>
 map <leader>ws :set splitbelow<CR>:split<CR>
 map <leader>wS :set nosplitbelow<CR>:split<CR>
+map <leader>w2 :set splitright<CR>:vsplit<CR>
+map <leader>w3 :set splitbelow<CR>:split<CR>
 
 " Window focus
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
 noremap <leader>wh <C-w>h
 noremap <leader>wj <C-w>j
 noremap <leader>wk <C-w>k
@@ -346,8 +349,8 @@ nmap mw <Plug>(easymotion-w)
 
 
 "" tag bar
-" (t)oggle (c)tags
-map <silent>tc :TagbarOpenAutoClose<CR>
+" ui/tag
+map <silent>ut :TagbarOpenAutoClose<CR>
 
 
 "" Markdown
@@ -376,8 +379,8 @@ let g:mkdp_page_title = '「${name}」'
 
 
 "" markdown table mode
-" (t)oggle (m)arkdown table mode
-map <leader>tm :TableModeToggle<CR>
+" ui/(m)arkdown table mode
+map <leader>um :TableModeToggle<CR>
 
 
 "" vim signiture
@@ -408,7 +411,7 @@ let g:SignatureMap = {
 
 "" undo tree
 let g:undotree_DiffAutoOpen = 0
-map <leader>u :UndotreeToggle<CR>:UndotreeFocus<CR>
+map <leader>uu :UndotreeToggle<CR>:UndotreeFocus<CR>
 
 
 "" Coc.vim
@@ -435,24 +438,24 @@ endfunction
 
 inoremap <silent><expr> <c-@> coc#refresh()
 
-" Use `[g` and `]g` to navigate diagnostics
+" Use `[d` and `]d` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> <leader>dd :call ShowDocumentation()<CR>
+nmap <silent> <leader>cd :call ShowDocumentation()<CR>
 
 
 "" Nerd commenter
-map <leader>/ <leader>c<leader>
+nnoremap gcc <leader>c<leader>
+vnoremap gc <leader>c<leader>
 
 
 "" auto pairs
 
 let g:AutoPairsMapSpace = 0
-
 
